@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">flood-it</string>
+    <string name="turns_ui_turns_label">Turns %1$s/%2$s</string>
+    <string name="game_over_win">You win!</string>
+    <string name="game_over_lose">You lose!</string>
+    <string name="game_over_restart">Restart game</string>
+</resources>
