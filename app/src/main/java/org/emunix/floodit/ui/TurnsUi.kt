@@ -15,15 +15,15 @@ import org.emunix.floodit.ui.theme.FlooditTheme
 
 @Composable
 fun TurnsUi(
-        modifier: Modifier = Modifier,
-        turn: String,
-        maxTurns: String
+    modifier: Modifier = Modifier,
+    turn: String,
+    maxTurns: String
 ) {
     Text(
-            modifier = modifier,
-            textAlign = TextAlign.Center,
-            fontSize = 32.sp,
-            text = stringResource(id = R.string.turns_ui_turns_label, turn, maxTurns),
+        modifier = modifier,
+        textAlign = TextAlign.Center,
+        fontSize = 28.sp,
+        text = stringResource(id = R.string.turns_ui_turns_label, turn, maxTurns),
     )
 }
 
@@ -32,11 +32,11 @@ fun TurnsUi(
 fun TurnsUiPreview() {
     FlooditTheme {
         TurnsUi(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth(),
-                turn = "13",
-                maxTurns = "24"
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            turn = "13",
+            maxTurns = "24"
         )
     }
 }

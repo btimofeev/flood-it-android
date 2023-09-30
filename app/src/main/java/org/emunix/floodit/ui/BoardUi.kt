@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -16,11 +17,15 @@ fun BoardUi(
         modifier: Modifier = Modifier,
         boardState: List<List<Int>>
 ) {
-    BoxWithConstraints(modifier) {
+    BoxWithConstraints(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        val minSize = if (maxWidth < maxHeight) maxWidth else maxHeight
         Canvas(
                 modifier = Modifier
-                        .width(this.maxWidth)
-                        .height(this.maxWidth),
+                        .width(minSize)
+                        .height(minSize),
                 onDraw = {
                     val rowCount = boardState.count()
                     val cellSize = ceil(size.width / rowCount)

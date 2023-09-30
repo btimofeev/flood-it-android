@@ -1,11 +1,18 @@
 package org.emunix.floodit.ui
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.emunix.floodit.ui.theme.FlooditTheme
 import org.emunix.floodit.ui.theme.getColorByNumber
@@ -13,54 +20,47 @@ import org.emunix.floodit.ui.theme.getColorByNumber
 @Composable
 fun ButtonsUi(
     modifier: Modifier = Modifier,
-    buttonSize: Dp,
     onButtonClick: (Int) -> Unit,
 ) {
-    Column {
-        Row(
-            modifier = modifier,
-            horizontalArrangement = Arrangement.SpaceEvenly
+    BoxWithConstraints(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        val buttonSize = if (64.dp < maxHeight / 3) 64.dp else maxHeight / 3
+        val verticalPadding = buttonSize / 4
+        Column(
+            modifier = Modifier.fillMaxHeight()
         ) {
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(1) },
-                backgroundColor = getColorByNumber(1)
-            ) {}
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(2) },
-                backgroundColor = getColorByNumber(2)
-            ) {}
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(3) },
-                backgroundColor = getColorByNumber(3)
-            ) {}
-        }
-        Row(
-            modifier = modifier,
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(4) },
-                backgroundColor = getColorByNumber(4)
-            ) {}
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(5) },
-                backgroundColor = getColorByNumber(5)
-            ) {}
-            FloatingActionButton(
-                modifier = Modifier.size(buttonSize),
-                onClick = { onButtonClick.invoke(6) },
-                backgroundColor = getColorByNumber(6)
-            ) {}
+            val rowCount = 2
+            val buttonsInRowCount = 3
+
+            repeat(rowCount) {
+                val baseButtonNumber = it * buttonsInRowCount
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(0.dp, verticalPadding),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    repeat(buttonsInRowCount) {
+                        val buttonNumber = it + 1 + baseButtonNumber
+                        FloatingActionButton(
+                            modifier = Modifier.size(buttonSize),
+                            onClick = { onButtonClick.invoke(buttonNumber) },
+                            backgroundColor = getColorByNumber(buttonNumber)
+                        ) {}
+                    }
+                }
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    heightDp = 200,
+    widthDp = 400,
+    showBackground = true
+)
 @Composable
 fun ButtonsUiPreview() {
     FlooditTheme {
@@ -68,7 +68,6 @@ fun ButtonsUiPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(0.dp, 16.dp),
-            buttonSize = 64.dp
         ) { }
     }
 }
