@@ -12,7 +12,7 @@ The object of the game is to flood the whole board with one color in less than 2
 
 ### Screenshots
 
-<img src="/images/screenshots/1.png" width="270"> <img src="/images/screenshots/2.png" width="270"> <img src="/images/screenshots/3.png" width="270">
+<img src="/images/screenshots/1.jpg" width="270"> <img src="/images/screenshots/2.jpg" width="270"> <img src="/images/screenshots/3.jpg" width="270">
 
 
 ### License
