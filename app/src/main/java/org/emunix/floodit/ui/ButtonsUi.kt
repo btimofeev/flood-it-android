@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.emunix.floodit.ui.theme.FlooditTheme
 import org.emunix.floodit.ui.theme.getColorByNumber
@@ -26,7 +27,7 @@ fun ButtonsUi(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        val buttonSize = if (64.dp < maxHeight / 3) 64.dp else maxHeight / 3
+        val buttonSize = getButtonSize(maxWidth, maxHeight)
         val verticalPadding = buttonSize / 4
         Column(
             modifier = Modifier.fillMaxHeight()
@@ -55,6 +56,16 @@ fun ButtonsUi(
         }
     }
 }
+
+private fun getButtonSize(maxWidth: Dp, maxHeight: Dp): Dp =
+    if (maxWidth > 600.dp) {
+        getSizeLessThan(112.dp, maxHeight)
+    } else {
+        getSizeLessThan(64.dp, maxHeight)
+    }
+
+private fun getSizeLessThan(default: Dp, maxHeight: Dp): Dp =
+    if (default < maxHeight / 3) default else maxHeight / 3
 
 @Preview(
     heightDp = 200,
