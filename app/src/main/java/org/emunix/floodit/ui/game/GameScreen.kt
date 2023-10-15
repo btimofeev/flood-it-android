@@ -1,4 +1,4 @@
-package org.emunix.floodit.ui
+package org.emunix.floodit.ui.game
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,7 @@ import org.emunix.floodit.domain.GameState.RUN
 import org.emunix.floodit.ui.theme.FlooditTheme
 
 @Composable
-fun GameUi(
+fun GameScreen(
     gameState: GameState,
     turn: String,
     maxTurns: String,
@@ -116,7 +116,7 @@ fun GameUi(
 @Composable
 fun GameUiPreview() {
     FlooditTheme {
-        GameUi(
+        GameScreen(
             gameState = RUN,
             turn = "13",
             maxTurns = "24",

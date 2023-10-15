@@ -1,4 +1,4 @@
-package org.emunix.floodit.ui
+package org.emunix.floodit.ui.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints

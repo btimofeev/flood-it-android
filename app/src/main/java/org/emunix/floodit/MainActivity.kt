@@ -8,10 +8,11 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.SideEffect
-import org.emunix.floodit.ui.GameUi
-import org.emunix.floodit.ui.theme.FlooditTheme
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import org.emunix.floodit.ui.game.FloodItApp
+import org.emunix.floodit.ui.theme.FlooditTheme
 import org.emunix.floodit.viewModel.GameViewModel
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val gameViewModel by viewModels<GameViewModel>()
-
         setContent {
+            val navController = rememberNavController()
+            val gameViewModel by viewModels<GameViewModel>()
             FlooditTheme {
                 val systemUiController = rememberSystemUiController()
                 val darkTheme = isSystemInDarkTheme()
@@ -34,13 +35,9 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Surface(color = MaterialTheme.colors.background) {
-                    GameUi(
-                        gameState = gameViewModel.gameState,
-                        turn = gameViewModel.turn,
-                        maxTurns = gameViewModel.maxTurns,
-                        boardState = gameViewModel.board,
-                        onColorButtonClick = { color -> gameViewModel.chooseColor(color) },
-                        onRestartButtonClick = { gameViewModel.newGame() }
+                    FloodItApp(
+                        gameViewModel = gameViewModel,
+                        navController = navController
                     )
                 }
             }
