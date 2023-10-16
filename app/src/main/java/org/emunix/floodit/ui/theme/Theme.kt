@@ -1,10 +1,21 @@
 package org.emunix.floodit.ui.theme
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import org.emunix.floodit.R.string
+
+enum class AppTheme(@StringRes val nameRes: Int) {
+    SYSTEM(nameRes = string.theme_system),
+    LIGHT(nameRes = string.theme_light),
+    DARK(nameRes = string.theme_dark),
+}
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -28,11 +39,23 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun FlooditTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun FlooditTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = if (darkTheme) Color.Black else Color.Transparent,
+            darkIcons = !darkTheme,
+        )
     }
 
     MaterialTheme(

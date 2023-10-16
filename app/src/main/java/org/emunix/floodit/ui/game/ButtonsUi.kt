@@ -59,7 +59,7 @@ fun ButtonsUi(
 
 private fun getButtonSize(maxWidth: Dp, maxHeight: Dp): Dp =
     if (maxWidth > 600.dp) {
-        getSizeLessThan(112.dp, maxHeight)
+        getSizeLessThan(96.dp, maxHeight)
     } else {
         getSizeLessThan(64.dp, maxHeight)
     }

@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.emunix.floodit.R
+import org.emunix.floodit.R.string
 import org.emunix.floodit.domain.GameState
 import org.emunix.floodit.domain.GameState.RUN
 import org.emunix.floodit.ui.theme.FlooditTheme
@@ -33,6 +38,7 @@ fun GameScreen(
     boardState: List<List<Int>>,
     onColorButtonClick: (Int) -> Unit,
     onRestartButtonClick: () -> Unit,
+    onSettingsButtonClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -47,7 +53,12 @@ fun GameScreen(
                 contentColor = MaterialTheme.colors.onBackground,
                 backgroundColor = MaterialTheme.colors.background,
                 actions = {
-                    //IconButton(onClick = { shouldShowNewGameDialog = true }) { Icon(Icons.Filled.Add) }
+                    IconButton(onClick = { onSettingsButtonClick.invoke() }) {
+                        Icon(
+                            imageVector = Icons.Filled.Settings,
+                            contentDescription = stringResource(id = string.settings)
+                        )
+                    }
                 },
                 elevation = 0.dp
             )
@@ -129,7 +140,8 @@ fun GameUiPreview() {
                 listOf(1,2,3,4,5,6).shuffled(),
             ),
             onColorButtonClick = {},
-            onRestartButtonClick = {}
+            onRestartButtonClick = {},
+            onSettingsButtonClick = {},
         )
     }
 }
