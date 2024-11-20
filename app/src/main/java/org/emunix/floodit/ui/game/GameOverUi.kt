@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.emunix.floodit.R
 import org.emunix.floodit.ui.theme.FlooditTheme
+import org.emunix.floodit.ui.theme.Green
 import org.emunix.floodit.ui.theme.Red
 import java.util.*
 
@@ -22,7 +23,9 @@ import java.util.*
 fun GameOverUi(
     modifier: Modifier = Modifier,
     message: String,
-    onRestartClick: () -> Unit
+    onNewGameClick: () -> Unit,
+    onTryAgainButtonClick: () -> Unit,
+    isTryAgainVisible: Boolean,
 ) {
     Column(
         modifier = modifier,
@@ -36,15 +39,29 @@ fun GameOverUi(
         )
 
         Button(
-            onClick = { onRestartClick.invoke() },
+            onClick = { onNewGameClick.invoke() },
             modifier = Modifier
-                .padding(12.dp),
+                .padding(12.dp, 12.dp, 12.dp, 0.dp),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Red,
                 contentColor = Color.White,
             )
         ) {
-            Text(stringResource(R.string.game_over_restart).uppercase(Locale.ROOT))
+            Text(stringResource(R.string.game_over_new_game).uppercase(Locale.ROOT))
+        }
+
+        if (isTryAgainVisible) {
+            Button(
+                onClick = { onTryAgainButtonClick.invoke() },
+                modifier = Modifier
+                    .padding(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Green,
+                    contentColor = Color.White,
+                )
+            ) {
+                Text(stringResource(R.string.game_over_try_again).uppercase(Locale.ROOT))
+            }
         }
     }
 }
@@ -60,7 +77,10 @@ fun GameOverUiPreview() {
         GameOverUi(
             modifier = Modifier
                 .fillMaxWidth(),
-            message = stringResource(id = R.string.game_over_win)
-        ) { }
+            message = stringResource(id = R.string.game_over_win),
+            onNewGameClick = {},
+            onTryAgainButtonClick = {},
+            isTryAgainVisible = true
+        )
     }
 }

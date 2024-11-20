@@ -22,14 +22,31 @@ class GameViewModel : ViewModel() {
     var gameState by mutableStateOf(GameState.RUN)
     private set
 
+    private var initialBoard: List<List<Int>>? = null
+
     init {
         newGame()
     }
 
     fun newGame() {
-        game = Game(Board(BoardConfig(14, 14, 6)))
+        game = Game(createBoard())
+        initialBoard = game.currentBoardState()
         updateUI()
     }
+
+    fun tryAgain() {
+        val board = createBoard()
+        initialBoard?.apply { board.setup(this) }
+        game = Game(board)
+        updateUI()
+    }
+
+    fun chooseColor(value: Int) {
+        game.chooseColor(value)
+        updateUI()
+    }
+
+    private fun createBoard() = Board(BoardConfig(14, 14, 6))
 
     private fun updateUI() {
         board = game.currentBoardState()
@@ -38,8 +55,11 @@ class GameViewModel : ViewModel() {
         gameState = game.state
     }
 
-    fun chooseColor(value: Int) {
-        game.chooseColor(value)
-        updateUI()
+    private fun Board.setup(newBoard: List<List<Int>>) {
+        newBoard.forEachIndexed { y, row ->
+            row.forEachIndexed { x, color ->
+                this.set(x + 1, y + 1, color)
+            }
+        }
     }
 }

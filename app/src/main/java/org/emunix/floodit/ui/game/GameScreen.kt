@@ -37,7 +37,8 @@ fun GameScreen(
     maxTurns: String,
     boardState: List<List<Int>>,
     onColorButtonClick: (Int) -> Unit,
-    onRestartButtonClick: () -> Unit,
+    onNewGameButtonClick: () -> Unit,
+    onTryAgainButtonClick: () -> Unit,
     onSettingsButtonClick: () -> Unit,
 ) {
     Scaffold(
@@ -100,12 +101,16 @@ fun GameScreen(
                     GameState.WIN -> GameOverUi(
                         modifier = Modifier.fillMaxWidth(),
                         message = stringResource(R.string.game_over_win),
-                        onRestartClick = onRestartButtonClick
+                        onNewGameClick = onNewGameButtonClick,
+                        onTryAgainButtonClick = {},
+                        isTryAgainVisible = false,
                     )
                     GameState.LOSE -> GameOverUi(
                         modifier = Modifier.fillMaxWidth(),
                         message = stringResource(R.string.game_over_lose),
-                        onRestartClick = onRestartButtonClick
+                        onNewGameClick = onNewGameButtonClick,
+                        onTryAgainButtonClick = onTryAgainButtonClick,
+                        isTryAgainVisible = true,
                     )
                     else -> ButtonsUi(
                         modifier = Modifier
@@ -140,7 +145,8 @@ fun GameUiPreview() {
                 listOf(1,2,3,4,5,6).shuffled(),
             ),
             onColorButtonClick = {},
-            onRestartButtonClick = {},
+            onNewGameButtonClick = {},
+            onTryAgainButtonClick = {},
             onSettingsButtonClick = {},
         )
     }

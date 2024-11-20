@@ -31,7 +31,8 @@ fun FloodItApp(
                 maxTurns = gameViewModel.maxTurns,
                 boardState = gameViewModel.board,
                 onColorButtonClick = { color -> gameViewModel.chooseColor(color) },
-                onRestartButtonClick = { gameViewModel.newGame() },
+                onNewGameButtonClick = { gameViewModel.newGame() },
+                onTryAgainButtonClick = { gameViewModel.tryAgain() },
                 onSettingsButtonClick = { navController.navigate(SETTINGS.name) }
             )
         }

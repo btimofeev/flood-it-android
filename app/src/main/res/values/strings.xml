@@ -3,7 +3,8 @@
     <string name="turns_ui_turns_label">Turns %1$s/%2$s</string>
     <string name="game_over_win">You win!</string>
     <string name="game_over_lose">You lose!</string>
-    <string name="game_over_restart">Restart game</string>
+    <string name="game_over_new_game">New game</string>
+    <string name="game_over_try_again">Try again</string>
 
     <string name="settings">Settings</string>
     <string name="settings_back_content_description">Back</string>
