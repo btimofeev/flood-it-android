@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'org.emunix.floodit'
-    compileSdk 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId "org.emunix.floodit"
-        minSdk 21
-        targetSdkVersion 35
+        minSdk 23
+        targetSdkVersion 36
         versionCode 120
         versionName "1.2"
 
